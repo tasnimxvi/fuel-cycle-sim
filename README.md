@@ -12,9 +12,9 @@ Currently, two official plugins are available:
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
 
 
-## installation
+# Installation
 
-Install Javascript is you dont have node.js
+Install Javascript is you don't have node.js
 ```bash
 sudo apt install npm
 ```
@@ -29,7 +29,7 @@ Install [xyflow react](https://github.com/xyflow/xyflow)
 npm install @xyflow/react
 ```
 
-## run script
+## Run application
 
 Once in the  directory:
 ```
