@@ -10,3 +10,28 @@ Currently, two official plugins are available:
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+
+## installation
+
+Install Javascript is you dont have node.js
+```bash
+sudo apt install npm
+```
+
+Install [vite](https://vite.dev/) 
+```bash
+npm install -D vite
+```
+
+Install [xyflow react](https://github.com/xyflow/xyflow) 
+```bash
+npm install @xyflow/react
+```
+
+## run script
+
+Once in the  directory:
+```
+npm run dev
+```
