@@ -3,24 +3,30 @@ An interactive visual tool built with React Flow and a python (Flask) backend to
 
 # Required Installations
 Make sure the following are installed on your system:
-Node.js + npm
-Python 3.8+
-pip for Python package management
+- Node.js + npm
+- Python 3.8+
+- pip for Python package management
 
 # Project Structure
 fuel-cycle-sim/
+
 ├── package.json          # Frontend (React) dependencies
+
 ├── src/
+
 │   ├── backend.py        # Python backend API
+
 │   └── requirements.txt  # Backend dependencies
 
 # Installation and Setup
 Once in the directory, install frontend and backend dependencies:
+
 Front end
 ```bash
 npm install
 ```
 Back end
+
 Recommend setting up a virtual environment. Proceed as follows:
 ```bash
 cd src
@@ -37,6 +43,7 @@ npm run start:both
 ```
 This will:
 Start the React frontend at http://localhost:5173
+
 Start the Flask backend at http://localhost:8000
 
 If you are working on one side, you can also run the following commands for front end and back end respectively:
