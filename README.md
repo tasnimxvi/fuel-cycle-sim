@@ -31,7 +31,7 @@ npm install @xyflow/react
 
 ## Run application
 
-Once in the  directory:
+Once in the  directory, 
 ```
-npm run dev
+npm run start:both
 ```
