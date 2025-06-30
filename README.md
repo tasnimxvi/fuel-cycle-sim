@@ -39,6 +39,11 @@ Install [Flask CORS](https://pypi.org/project/flask-cors/)
 pip install flask-cors
 ```
 
+Install [concurrently](https://pypi.org/project/concurrently/) 
+```bash
+pip install concurrently
+```
+
 ## Run application
 
 Once in the  directory, 
