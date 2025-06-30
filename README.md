@@ -8,6 +8,7 @@ Make sure the following are installed on your system:
 - pip for Python package management
 
 # Project Structure
+```bash
 fuel-cycle-sim/
 
 ├── package.json          # Frontend (React) dependencies
@@ -17,6 +18,7 @@ fuel-cycle-sim/
 │   ├── backend.py        # Python backend API
 
 │   └── requirements.txt  # Backend dependencies
+```
 
 # Installation and Setup
 Once in the directory, install frontend and backend dependencies:
@@ -42,9 +44,8 @@ You can run both frontend and backend at once
 npm run start:both
 ```
 This will:
-Start the React frontend at http://localhost:5173
-
-Start the Flask backend at http://localhost:8000
+- Start the React frontend at http://localhost:5173
+- Start the Flask backend at http://localhost:8000
 
 If you are working on one side, you can also run the following commands for front end and back end respectively:
 ```
