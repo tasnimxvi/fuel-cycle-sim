@@ -29,6 +29,16 @@ Install [xyflow react](https://github.com/xyflow/xyflow)
 npm install @xyflow/react
 ```
 
+Install [Flask](https://flask.palletsprojects.com/en/stable/installation/) 
+```bash
+pip install flask
+```
+
+Install [Flask CORS](https://pypi.org/project/flask-cors/) 
+```bash
+pip install flask-cors
+```
+
 ## Run application
 
 Once in the  directory, 
