@@ -18,7 +18,7 @@ import { makeEdge } from './CustomEdge';
 const nodeTypes = {
   custom: CustomNode,
 };
- 
+
 // Defining initial nodes. In the data section, we have label, but also parameters specific to the node.
 const initialNodes = [
   { id: '1', type: 'custom', position: { x: 300, y: 100 }, data: { label: 'Storage', a: '', b: '', output: null } },
@@ -41,15 +41,36 @@ export default function App() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const [selectedNode, setSelectedNode] = useState(null);
-  // Lets user connect two nodes by creating an edge
+
+  // When user connects two nodes by dragging, creates an edge according to the styles in our makeEdge function
   const onConnect = useCallback(
-    (params) => setEdges((eds) => addEdge(params, eds)),
-    [setEdges],
+    (params) => {
+      const newEdge = makeEdge({
+        id: `e${params.source}-${params.target}`,
+        source: params.source,
+        target: params.target,
+      });
+      setEdges((eds) => [...eds, newEdge]);
+    },
+    [setEdges]
   );
+  
   // Function that when we click on a node, sets that node as the selected node
   const onNodeClick = (event, node) => {
     setSelectedNode(node);
   };
+  // Function to add a new node to the graph
+  const addNode = () => {
+    const newNodeId = (nodes.length + 1).toString();
+    const newNode = {
+      id: newNodeId,
+      type: 'custom',
+      position: { x: 200 + nodes.length * 50, y: 200 }, // adjust as needed
+      data: { label: `Node ${newNodeId}`, a: '', b: '', output: null },
+    };
+    setNodes((nds) => [...nds, newNode]);
+  };
+
 
   // Function to compute output for the selected node by sending a request to the backend
   const computeOutput = async (node) => {
@@ -57,7 +78,7 @@ export default function App() {
     // Deleting the preexisting label and output that were assigned to the node's parameters
     delete params.label;
     delete params.output;
-  
+
     // Here we fetch the computed result of the applied function in the python backend
     try {
       const response = await fetch('http://localhost:8000/compute', {
@@ -68,9 +89,9 @@ export default function App() {
           params: params,
         }),
       });
-  
+
       const result = await response.json();
-  
+
       // Updating the output field of the node
       setNodes((nds) =>
         nds.map((n) =>
@@ -84,9 +105,9 @@ export default function App() {
       console.error('Error computing output:', error);
     }
   };
-  
+
   return (
-    <div style={{ width: '100vw', height: '100vh', position: 'relative' }}> 
+    <div style={{ width: '100vw', height: '100vh', position: 'relative' }}>
       <ReactFlow
         nodes={nodes}
         edges={edges}
@@ -99,6 +120,23 @@ export default function App() {
         <Controls />
         <MiniMap />
         <Background variant="dots" gap={12} size={1} />
+        <button
+            style={{
+              position: 'absolute',
+              left: 20,
+              top: 20,
+              zIndex: 10,
+              padding: '8px 12px',
+              backgroundColor: '#007bff',
+              color: 'white',
+              border: 'none',
+              borderRadius: 5,
+              cursor: 'pointer',
+            }}
+            onClick={addNode}
+          >
+            Add Node
+          </button>
       </ReactFlow>
       {selectedNode && (
         <div
@@ -131,14 +169,14 @@ export default function App() {
                       ...selectedNode,
                       data: { ...selectedNode.data, [key]: newValue },
                     };
-                  
+
                     setNodes((nds) =>
                       nds.map((node) =>
                         node.id === selectedNode.id ? updatedNode : node
                       )
                     );
                     setSelectedNode(updatedNode);
-                  
+
                     computeOutput(updatedNode); // Trigger output computation (to backend)
                   }}
                   style={{ width: '100%', marginTop: 4 }}
@@ -157,8 +195,8 @@ export default function App() {
       )}
     </div>
   );
-  
+
 }
- 
+
 
 
