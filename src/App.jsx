@@ -65,34 +65,41 @@ export default function App() {
     const newNode = {
       id: newNodeId,
       type: 'custom',
-      position: { x: 200 + nodes.length * 50, y: 200 }, // adjust as needed
+      position: { x: 200 + nodes.length * 50, y: 200 }, 
       data: { label: `Node ${newNodeId}`, a: '', b: '', output: null },
     };
     setNodes((nds) => [...nds, newNode]);
   };
 
 
-  // Function to compute output for the selected node by sending a request to the backend
   const computeOutput = async (node) => {
     const params = { ...node.data };
-    // Deleting the preexisting label and output that were assigned to the node's parameters
     delete params.label;
     delete params.output;
-
-    // Here we fetch the computed result of the applied function in the python backend
+  
+    // Finds incoming nodes
+    const incomingNodeIds = edges
+      .filter((edge) => edge.target === node.id)
+      .map((edge) => edge.source);
+    // Outputs of incoming nodes
+    const incomingOutputs = nodes
+      .filter((n) => incomingNodeIds.includes(n.id))
+      .map((n) => n.data.output)
+      .filter((output) => output !== null); // Ignores nonexistent outputs
+  
     try {
       const response = await fetch('http://localhost:8000/compute', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           id: node.id,
-          params: params,
+          params,
+          incomingOutputs, 
         }),
       });
-
+  
       const result = await response.json();
-
-      // Updating the output field of the node
+  
       setNodes((nds) =>
         nds.map((n) =>
           n.id === node.id
@@ -100,12 +107,11 @@ export default function App() {
             : n
         )
       );
-      // If the computation doesn't work, we return an error
     } catch (error) {
       console.error('Error computing output:', error);
     }
   };
-
+  
   return (
     <div style={{ width: '100vw', height: '100vh', position: 'relative' }}>
       <ReactFlow
