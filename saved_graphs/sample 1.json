@@ -1,182 +1,182 @@
 {
   "nodes": [
     {
+      "data": {
+        "a": "2",
+        "b": "3",
+        "label": "Storage",
+        "output": 5
+      },
       "id": "1",
-      "type": "custom",
+      "measured": {
+        "height": 68,
+        "width": 200
+      },
       "position": {
         "x": 300,
         "y": 100
       },
-      "data": {
-        "label": "Storage",
-        "a": "2",
-        "b": "3",
-        "output": 5
-      },
-      "measured": {
-        "width": 200,
-        "height": 68
-      },
-      "selected": false
+      "selected": false,
+      "type": "custom"
     },
     {
+      "data": {
+        "c": "4",
+        "label": "Plasma",
+        "output": 9
+      },
+      "dragging": false,
       "id": "2",
-      "type": "custom",
+      "measured": {
+        "height": 68,
+        "width": 200
+      },
       "position": {
         "x": 646,
         "y": 86
       },
-      "data": {
-        "label": "Plasma",
-        "c": "4",
-        "output": 9
-      },
-      "measured": {
-        "width": 200,
-        "height": 68
-      },
       "selected": false,
-      "dragging": false
+      "type": "custom"
     },
     {
+      "data": {
+        "a": "3",
+        "b": "4",
+        "label": "Tritium Extraction System",
+        "output": 7
+      },
       "id": "3",
-      "type": "custom",
+      "measured": {
+        "height": 92,
+        "width": 200
+      },
       "position": {
         "x": 300,
         "y": 250
       },
-      "data": {
-        "label": "Tritium Extraction System",
-        "a": "3",
-        "b": "4",
-        "output": 7
-      },
-      "measured": {
-        "width": 200,
-        "height": 92
-      }
+      "type": "custom"
     },
     {
+      "data": {
+        "a": "3",
+        "b": "2",
+        "label": "Breeding Blanket",
+        "output": 9
+      },
+      "dragging": false,
       "id": "4",
-      "type": "custom",
+      "measured": {
+        "height": 68,
+        "width": 200
+      },
       "position": {
         "x": 636,
         "y": 305
       },
-      "data": {
-        "label": "Breeding Blanket",
-        "a": "3",
-        "b": "2",
-        "output": 9
-      },
-      "measured": {
-        "width": 200,
-        "height": 68
-      },
       "selected": false,
-      "dragging": false
+      "type": "custom"
     },
     {
+      "data": {
+        "a": "4",
+        "b": "5",
+        "label": "new node",
+        "output": 18
+      },
+      "dragging": false,
       "id": "5",
-      "type": "custom",
+      "measured": {
+        "height": 68,
+        "width": 200
+      },
       "position": {
         "x": 814,
         "y": 191
       },
-      "data": {
-        "label": "Node 5",
-        "a": "4",
-        "b": "5",
-        "output": 18
-      },
-      "measured": {
-        "width": 200,
-        "height": 68
-      },
       "selected": false,
-      "dragging": false
+      "type": "custom"
     }
   ],
   "edges": [
     {
       "id": "e1-2",
-      "source": "1",
-      "target": "2",
-      "type": "smoothstep",
-      "style": {
-        "strokeWidth": 2,
-        "stroke": "#FF0072"
-      },
       "markerEnd": {
-        "type": "arrowclosed",
-        "width": 20,
+        "color": "#FF0072",
         "height": 20,
-        "color": "#FF0072"
-      }
+        "type": "arrowclosed",
+        "width": 20
+      },
+      "source": "1",
+      "style": {
+        "stroke": "#FF0072",
+        "strokeWidth": 2
+      },
+      "target": "2",
+      "type": "smoothstep"
     },
     {
       "id": "e3-1",
-      "source": "3",
-      "target": "1",
-      "type": "smoothstep",
-      "style": {
-        "strokeWidth": 2,
-        "stroke": "#FF0072"
-      },
       "markerEnd": {
-        "type": "arrowclosed",
-        "width": 20,
+        "color": "#FF0072",
         "height": 20,
-        "color": "#FF0072"
-      }
+        "type": "arrowclosed",
+        "width": 20
+      },
+      "source": "3",
+      "style": {
+        "stroke": "#FF0072",
+        "strokeWidth": 2
+      },
+      "target": "1",
+      "type": "smoothstep"
     },
     {
       "id": "e4-3",
-      "source": "4",
-      "target": "3",
-      "type": "smoothstep",
-      "style": {
-        "strokeWidth": 2,
-        "stroke": "#FF0072"
-      },
       "markerEnd": {
-        "type": "arrowclosed",
-        "width": 20,
+        "color": "#FF0072",
         "height": 20,
-        "color": "#FF0072"
-      }
+        "type": "arrowclosed",
+        "width": 20
+      },
+      "source": "4",
+      "style": {
+        "stroke": "#FF0072",
+        "strokeWidth": 2
+      },
+      "target": "3",
+      "type": "smoothstep"
     },
     {
       "id": "e2-4",
-      "source": "2",
-      "target": "4",
-      "type": "smoothstep",
-      "style": {
-        "strokeWidth": 2,
-        "stroke": "#FF0072"
-      },
       "markerEnd": {
-        "type": "arrowclosed",
-        "width": 20,
+        "color": "#FF0072",
         "height": 20,
-        "color": "#FF0072"
-      }
+        "type": "arrowclosed",
+        "width": 20
+      },
+      "source": "2",
+      "style": {
+        "stroke": "#FF0072",
+        "strokeWidth": 2
+      },
+      "target": "4",
+      "type": "smoothstep"
     },
     {
       "id": "e2-5",
-      "source": "2",
-      "target": "5",
-      "type": "smoothstep",
-      "style": {
-        "strokeWidth": 2,
-        "stroke": "#FF0072"
-      },
       "markerEnd": {
-        "type": "arrowclosed",
-        "width": 20,
+        "color": "#FF0072",
         "height": 20,
-        "color": "#FF0072"
-      }
+        "type": "arrowclosed",
+        "width": 20
+      },
+      "source": "2",
+      "style": {
+        "stroke": "#FF0072",
+        "strokeWidth": 2
+      },
+      "target": "5",
+      "type": "smoothstep"
     }
   ]
 }
