@@ -45,12 +45,12 @@ export default function App() {
   // Function to save a graph
   const saveGraph = async () => {
     const filename = prompt("Enter a name for your graph file:") || "file_1";
-  
+
     const graphData = {
       nodes,
       edges,
     };
-  
+
     try {
       const response = await fetch('http://localhost:8000/save', {
         method: 'POST',
@@ -60,14 +60,39 @@ export default function App() {
           graph: graphData,
         }),
       });
-  
+
       const result = await response.json();
       alert(result.message);
     } catch (error) {
       console.error('Error saving graph:', error);
     }
   };
-  
+  // Function to load a saved graph
+  const loadGraph = async () => {
+    const filename = prompt("Enter the name of the graph to load:");
+    if (!filename) return;
+
+    try {
+      const response = await fetch('http://localhost:8000/load', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ filename }),
+      });
+
+      if (!response.ok) {
+        alert("Failed to load file.");
+        return;
+      }
+
+      const { nodes: loadedNodes, edges: loadedEdges } = await response.json();
+      setNodes(loadedNodes);
+      setEdges(loadedEdges);
+      setSelectedNode(null);
+    } catch (error) {
+      console.error('Error loading graph:', error);
+    }
+  };
+
   // When user connects two nodes by dragging, creates an edge according to the styles in our makeEdge function
   const onConnect = useCallback(
     (params) => {
@@ -159,7 +184,7 @@ export default function App() {
             top: 20,
             zIndex: 10,
             padding: '8px 12px',
-            backgroundColor: '#007bff',
+            backgroundColor: '#78A083',
             color: 'white',
             border: 'none',
             borderRadius: 5,
@@ -172,11 +197,11 @@ export default function App() {
         <button
           style={{
             position: 'absolute',
-            left: 120,
+            right: 20,
             top: 20,
             zIndex: 10,
             padding: '8px 12px',
-            backgroundColor: '#28a745',
+            backgroundColor: '#78A083',
             color: 'white',
             border: 'none',
             borderRadius: 5,
@@ -185,6 +210,23 @@ export default function App() {
           onClick={saveGraph}
         >
           Save Graph
+        </button>
+        <button
+          style={{
+            position: 'absolute',
+            right: 140,
+            top: 20,
+            zIndex: 10,
+            padding: '8px 12px',
+            backgroundColor: '#78A083',
+            color: 'white',
+            border: 'none',
+            borderRadius: 5,
+            cursor: 'pointer',
+          }}
+          onClick={loadGraph}
+        >
+          Load Graph
         </button>
       </ReactFlow>
       {selectedNode && (

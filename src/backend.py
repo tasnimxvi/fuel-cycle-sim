@@ -58,5 +58,20 @@ def save_graph():
 
     return jsonify({'message': f'Graph saved as {valid_name}'})
 
+# Function to load saved graphs
+@app.route('/load', methods=['POST'])
+def load_graph():
+    data = request.json
+    filename = data.get('filename')
+    filepath = os.path.join(SAVE_DIR, f"{filename}.json")
+
+    if not os.path.exists(filepath):
+        return jsonify({"error": "File not found"}), 404
+
+    with open(filepath, "r") as f:
+        graph_data = json.load(f)
+
+    return jsonify(graph_data)
+
 if __name__ == '__main__':
     app.run(port=8000, debug=True)
