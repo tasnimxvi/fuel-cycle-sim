@@ -42,6 +42,32 @@ export default function App() {
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const [selectedNode, setSelectedNode] = useState(null);
 
+  // Function to save a graph
+  const saveGraph = async () => {
+    const filename = prompt("Enter a name for your graph file:") || "file_1";
+  
+    const graphData = {
+      nodes,
+      edges,
+    };
+  
+    try {
+      const response = await fetch('http://localhost:8000/save', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          filename,
+          graph: graphData,
+        }),
+      });
+  
+      const result = await response.json();
+      alert(result.message);
+    } catch (error) {
+      console.error('Error saving graph:', error);
+    }
+  };
+  
   // When user connects two nodes by dragging, creates an edge according to the styles in our makeEdge function
   const onConnect = useCallback(
     (params) => {
@@ -54,7 +80,7 @@ export default function App() {
     },
     [setEdges]
   );
-  
+
   // Function that when we click on a node, sets that node as the selected node
   const onNodeClick = (event, node) => {
     setSelectedNode(node);
@@ -65,7 +91,7 @@ export default function App() {
     const newNode = {
       id: newNodeId,
       type: 'custom',
-      position: { x: 200 + nodes.length * 50, y: 200 }, 
+      position: { x: 200 + nodes.length * 50, y: 200 },
       data: { label: `Node ${newNodeId}`, a: '', b: '', output: null },
     };
     setNodes((nds) => [...nds, newNode]);
@@ -76,7 +102,7 @@ export default function App() {
     const params = { ...node.data };
     delete params.label;
     delete params.output;
-  
+
     // Finds incoming nodes
     const incomingNodeIds = edges
       .filter((edge) => edge.target === node.id)
@@ -86,7 +112,7 @@ export default function App() {
       .filter((n) => incomingNodeIds.includes(n.id))
       .map((n) => n.data.output)
       .filter((output) => output !== null); // Ignores nonexistent outputs
-  
+
     try {
       const response = await fetch('http://localhost:8000/compute', {
         method: 'POST',
@@ -94,12 +120,12 @@ export default function App() {
         body: JSON.stringify({
           id: node.id,
           params,
-          incomingOutputs, 
+          incomingOutputs,
         }),
       });
-  
+
       const result = await response.json();
-  
+
       setNodes((nds) =>
         nds.map((n) =>
           n.id === node.id
@@ -111,7 +137,7 @@ export default function App() {
       console.error('Error computing output:', error);
     }
   };
-  
+
   return (
     <div style={{ width: '100vw', height: '100vh', position: 'relative' }}>
       <ReactFlow
@@ -127,22 +153,39 @@ export default function App() {
         <MiniMap />
         <Background variant="dots" gap={12} size={1} />
         <button
-            style={{
-              position: 'absolute',
-              left: 20,
-              top: 20,
-              zIndex: 10,
-              padding: '8px 12px',
-              backgroundColor: '#007bff',
-              color: 'white',
-              border: 'none',
-              borderRadius: 5,
-              cursor: 'pointer',
-            }}
-            onClick={addNode}
-          >
-            Add Node
-          </button>
+          style={{
+            position: 'absolute',
+            left: 20,
+            top: 20,
+            zIndex: 10,
+            padding: '8px 12px',
+            backgroundColor: '#007bff',
+            color: 'white',
+            border: 'none',
+            borderRadius: 5,
+            cursor: 'pointer',
+          }}
+          onClick={addNode}
+        >
+          Add Node
+        </button>
+        <button
+          style={{
+            position: 'absolute',
+            left: 120,
+            top: 20,
+            zIndex: 10,
+            padding: '8px 12px',
+            backgroundColor: '#28a745',
+            color: 'white',
+            border: 'none',
+            borderRadius: 5,
+            cursor: 'pointer',
+          }}
+          onClick={saveGraph}
+        >
+          Save Graph
+        </button>
       </ReactFlow>
       {selectedNode && (
         <div
@@ -162,7 +205,7 @@ export default function App() {
         >
           <h3>{selectedNode.data.label}</h3>
           {Object.entries(selectedNode.data)
-            .filter(([key]) => key !== 'label' && key !== 'output')
+            .filter(([key]) => key !== 'output')
             .map(([key, value]) => (
               <div key={key} style={{ marginBottom: '10px' }}>
                 <label>{key}:</label>
