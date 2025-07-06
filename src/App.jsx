@@ -93,6 +93,13 @@ export default function App() {
     }
   };
 
+  // Allows user to clear user inputs and go back to default settings
+  const resetGraph = () => {
+    setNodes(initialNodes);
+    setEdges(initialEdges);
+    setSelectedNode(null);
+  };
+
   // When user connects two nodes by dragging, creates an edge according to the styles in our makeEdge function
   const onConnect = useCallback(
     (params) => {
@@ -227,6 +234,23 @@ export default function App() {
           onClick={loadGraph}
         >
           Load Graph
+        </button>
+        <button
+          style={{
+            position: 'absolute',
+            left: 130,
+            top: 20,
+            zIndex: 10,
+            padding: '8px 12px',
+            backgroundColor: '#78A083',
+            color: 'white',
+            border: 'none',
+            borderRadius: 5,
+            cursor: 'pointer',
+          }}
+          onClick={resetGraph}
+        >
+          Reset Graph
         </button>
       </ReactFlow>
       {selectedNode && (
