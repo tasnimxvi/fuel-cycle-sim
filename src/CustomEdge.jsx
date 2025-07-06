@@ -2,14 +2,14 @@ import { MarkerType } from '@xyflow/react';
 
 const defaultEdgeStyle = {
   strokeWidth: 2,
-  stroke: '#FF0072',
+  stroke: '#ECDFCC',
 };
 
 const defaultMarkerEnd = {
   type: MarkerType.ArrowClosed,
   width: 20,
   height: 20,
-  color: '#FF0072',
+  color: '#ECDFCC',
 };
 
 export function makeEdge({ id, source, target, type = 'smoothstep', label, dashed = false }) {

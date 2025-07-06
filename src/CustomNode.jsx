@@ -6,8 +6,8 @@ export default function CustomNode({ data }) {
     <div
       style={{
         width: 180,
-        background: '#016c95',
-        color: 'white',
+        background: '#DDE6ED',
+        color: 'black',
         borderRadius: 12,
         padding: 10,
         fontWeight: 'bold',
