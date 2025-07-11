@@ -13,11 +13,12 @@ fuel-cycle-sim/
 
 ├── package.json          # Frontend (React) dependencies
 
+├── requirements.txt      # Backend dependencies
+
 ├── src/
 
 │   ├── backend.py        # Python backend API
 
-│   └── requirements.txt  # Backend dependencies
 ```
 
 # Installation and Setup
@@ -55,55 +56,3 @@ npm run dev
 npm run start:backend
 ```
 
-<!-- # React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-
-
-# Installation
-
-Install Javascript is you don't have node.js
-```bash
-sudo apt install npm
-```
-
-Install [vite](https://vite.dev/) 
-```bash
-npm install -D vite
-```
-
-Install [xyflow react](https://github.com/xyflow/xyflow) 
-```bash
-npm install @xyflow/react
-```
-
-Install [Flask](https://flask.palletsprojects.com/en/stable/installation/) 
-```bash
-pip install flask
-```
-
-Install [Flask CORS](https://pypi.org/project/flask-cors/) 
-```bash
-pip install flask-cors
-```
-
-Install [concurrently](https://pypi.org/project/concurrently/) 
-```bash
-pip install concurrently
-```
-
-## Run application
-
-Once in the  directory, 
-```
-npm run start:both
-``` -->
