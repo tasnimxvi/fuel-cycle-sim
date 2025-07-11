@@ -1,4 +1,5 @@
-#root {
+/* It seems like these styles were here by default, I commented them out to not interfere with the current design. */
+/* #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
@@ -16,8 +17,23 @@
 }
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
+} */
+
+/* This is the code for customizing the controls icons */
+.react-flow__controls {
+  background-color: #1e1e2f !important; 
 }
 
+.react-flow__controls-button {
+  background-color: #007bff !important;
+  color: white !important; 
+  border: none;
+}
+
+.react-flow__controls-button:hover {
+  background-color: #0056b3 !important;
+}
+/*  
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
@@ -39,4 +55,4 @@
 
 .read-the-docs {
   color: #888;
-}
+} */

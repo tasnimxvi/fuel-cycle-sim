@@ -9,6 +9,8 @@ import {
   addEdge,
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
+import './App.css';
+
 
 // Importing CustomNode component
 import CustomNode from './CustomNode';
