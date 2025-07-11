@@ -62,8 +62,9 @@ def save_graph():
 @app.route('/load', methods=['POST'])
 def load_graph():
     data = request.json
-    filename = data.get('filename')
-    filepath = os.path.join(SAVE_DIR, f"{filename}.json")
+    filename = data.get('filename') 
+    validname = filename if not filename.endswith('.json') else filename[:-5]
+    filepath = os.path.join(SAVE_DIR, f"{validname}.json")
 
     if not os.path.exists(filepath):
         return jsonify({"error": "File not found"}), 404

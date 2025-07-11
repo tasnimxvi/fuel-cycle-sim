@@ -46,7 +46,7 @@ export default function App() {
 
   // Function to save a graph
   const saveGraph = async () => {
-    const filename = prompt("Enter a name for your graph file:") || "file_1";
+    const filename = prompt("Your file will be saved in the saved_graphs folder. Enter a name for your file:") || "file_1";
 
     const graphData = {
       nodes,
@@ -71,7 +71,7 @@ export default function App() {
   };
   // Function to load a saved graph
   const loadGraph = async () => {
-    const filename = prompt("Enter the name of the graph to load:");
+    const filename = prompt("Enter the name of a file from the saved_graphs folder to load:");
     if (!filename) return;
 
     try {
@@ -218,7 +218,7 @@ export default function App() {
           }}
           onClick={saveGraph}
         >
-          Save Graph
+          Save File
         </button>
         <button
           style={{
@@ -235,7 +235,7 @@ export default function App() {
           }}
           onClick={loadGraph}
         >
-          Load Graph
+          Load File
         </button>
         <button
           style={{
