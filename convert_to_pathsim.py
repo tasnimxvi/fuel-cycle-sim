@@ -26,24 +26,26 @@ class Process(ODE):
 
 # read json file
 
-data = json.load(open("saved_graphs/test.json"))
+data = json.load(open("saved_graphs/test3.json"))
 
 
-def find_node_by_id(node_id):
+def find_node_by_id(node_id: str) -> dict:
     for node in data["nodes"]:
         if node["id"] == node_id:
             return node
     return None
 
 
-def find_block_by_id(block_id):
+def find_block_by_id(block_id: str) -> Block:
     for block in blocks:
         if block.id == block_id:
             return block
     return None
 
 
-connections = {}
+# create blocks
+
+connections = {node["id"]: [] for node in data["nodes"]}
 blocks = []
 for node in data["nodes"]:
     print(f"Processing node {node['id']}")
@@ -60,20 +62,30 @@ for node in data["nodes"]:
             betas.append(f / float(source_node["data"]["residence_time"]))
 
             connections[edge["source"]].append(edge["target"])
-    if node["data"]["residence_time"] != "":
-        alpha = -1 / float(node["data"]["residence_time"])
-    else:
-        alpha = 0
 
     block = Process(
-        alpha=alpha,
+        alpha=(
+            -1 / float(node["data"]["residence_time"])
+            if node["data"]["residence_time"] != ""
+            else 0
+        ),
         betas=betas,
-        ic=node["data"]["initial_value"],
-        gen=node["data"]["source_term"],
+        ic=(
+            float(node["data"]["initial_value"])
+            if node["data"]["initial_value"] != ""
+            else 0
+        ),
+        gen=(
+            float(node["data"]["source_term"])
+            if node["data"]["source_term"] != ""
+            else 0
+        ),
     )
     block.id = node["id"]
     block.label = node["data"]["label"]
     blocks.append(block)
+
+# add a Scope block
 
 scope = Scope(
     labels=[node["data"]["label"] for node in data["nodes"]],
@@ -82,6 +94,8 @@ scope.id = "scope"
 blocks.append(scope)
 
 next_outputs = {block.id: 0 for block in blocks}
+
+# Create connections based on the edges
 
 connections_pathsim = []
 for source, targets in connections.items():
@@ -101,6 +115,8 @@ for block in blocks:
         connection = Connection(block, scope[next_outputs[scope.id]])
         connections_pathsim.append(connection)
         next_outputs[scope.id] += 1
+
+# Create the simulation
 
 my_simulation = Simulation(blocks, connections_pathsim, log=False)
 
